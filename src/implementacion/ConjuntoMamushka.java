@@ -16,26 +16,45 @@ public class ConjuntoMamushka implements ConjuntoMamushkaTDA {
 
     @Override
     public void guardar(int dato) {
-
+       a[cant] = dato;
+       cant++;
     }
 
     @Override
     public void sacar(int dato) {
-
+        int i = 0;
+        while (i < cant && a[i] != dato){
+            i++;
+        }
+        if (i < cant){
+            a[i] = a[cant -1];
+            cant--;
+        }
     }
 
     @Override
     public int elegir() {
-        return 0;
+        int max = cant-1;
+        int min = 0;
+        int pos = (int)(Math.random() * (max-min+1) + min);
+        return a[pos];
     }
 
     @Override
     public int perteneceCant(int dato) {
-        return 0;
+        int i = 0;
+        int pertenececant = 0;
+        while (i < cant){
+            if (a[i] == dato){
+                pertenececant++;
+            }
+            i++;
+        }
+        return pertenececant;
     }
 
     @Override
     public boolean estaVacio() {
-        return false;
+        return (cant == 0);
     }
 }
