@@ -143,5 +143,16 @@ public class ejs {
         }
         return resultado;
     }
-
+    public static int ejercicio15(GrafoTDA grafo, int verticeEntrada) {
+        ConjuntoTDA conjuntoTDA = grafo.vertices();
+        int grados=0;
+        if (!conjuntoTDA.pertenece(verticeEntrada))return 0;
+        conjuntoTDA.sacar(verticeEntrada);
+        while(!conjuntoTDA.conjuntoVacio()){
+            int verticeDelGrafo = conjuntoTDA.elegir();
+            if(grafo.existeArista(verticeEntrada,verticeDelGrafo)){ grados++;}
+            conjuntoTDA.sacar(verticeDelGrafo);
+        }
+        return grados;
+    }
 }
