@@ -1,6 +1,11 @@
 package uso;
+import ImplementacionPackage.ColaImplementacion;
+import ImplementacionPackage.ConjuntoImplementacion;
+import InterfazPackage.ColaTDA;
+import InterfazPackage.ConjuntoTDA;
+import InterfazPackage.PilaTDA;
 import imple.*;
-import tda.*;
+import tda.DiccionarioSimpleTDA;
 
 
 public class ejs {
@@ -13,7 +18,7 @@ public class ejs {
         ColaTDA colaAux = new Cola();
         colaAux.inicializarCola();
         PilaTDA pilaAux = new Pila();
-        pilaAux.inicializarPila();
+        pilaAux.iniciarPila();
 
         // Usamos una pila auxiliar para no perder la pila original
         while (!pila.pilaVacia()) {
@@ -143,6 +148,55 @@ public class ejs {
         }
         return resultado;
     }
+    public float ejercicio6(PilaTDA pila) {
+		int valoresPares = 0;
+		int cantidadValores=0;
+		while(!pila.pilaVacia()) {
+			if(pila.tope()%2==0) valoresPares++;
+			cantidadValores++;
+			pila.desapilar();
+		}
+		return (valoresPares*cantidadValores)/100;
+	}
+	
+	public ConjuntoTDA ejercicio7(PilaTDA pila) {
+		ConjuntoTDA conjuntoReturn = new ConjuntoImplementacion();
+		conjuntoReturn.inicializarConjunto();
+		ConjuntoTDA conjuntoAux = new ConjuntoImplementacion();
+		conjuntoAux.inicializarConjunto();
+		
+		while(!pila.pilaVacia()) {
+			if(conjuntoAux.pertenece(pila.tope())) {
+				conjuntoReturn.agregar(pila.tope());
+			}
+			else {
+				conjuntoAux.agregar(pila.tope());
+			}
+			pila.desapilar();
+		}
+		return conjuntoReturn;
+	}
+	
+	public ColaTDA ejercicio8 (ColaTDA cola) {
+		ColaTDA colaReturn = new ColaImplementacion();
+		colaReturn.inicializarCola();
+		ColaTDA colaAux = new ColaImplementacion();
+		colaAux.inicializarCola();
+		while(!cola.colaVacia()) {
+			int valorCola = cola.primero();
+			cola.desacolar();
+			copiarCola(cola, colaAux);
+			if(!elementoEstaEnCola(valorCola, colaAux))colaReturn.acolar(valorCola);	
+		}
+		return colaReturn;
+	}
+	
+	private boolean elementoEstaEnCola(int valor,ColaTDA cola) {
+		while(!cola.colaVacia()) {
+			if(cola.primero() == valor) return true;
+		}
+		return false;
+	}
     public static int ejercicio15(GrafoTDA grafo, int verticeEntrada) {
         ConjuntoTDA conjuntoTDA = grafo.vertices();
         int grados=0;
