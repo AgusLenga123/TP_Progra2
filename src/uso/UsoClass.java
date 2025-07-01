@@ -194,6 +194,20 @@ public class UsoClass {
         return ejercicio13(arbol.hijoIzq()) + ejercicio13(arbol.hijoDer());
     }
 
+    public ConjuntoTDA ejercicio14(GrafoTDA grafo, int origen, int destino) {
+        ConjuntoTDA resultado = new Conjunto();
+        resultado.inicializarConjunto();
+        ConjuntoTDA vertices = grafo.vertices();
+        while (!vertices.conjuntoVacio()) {
+            int p = vertices.elegir();
+            vertices.sacar(p);
+            if (grafo.existeArista(origen, p) && grafo.existeArista(p, destino)) {
+                resultado.agregar(p);
+            }
+        }
+        return resultado;
+    }
+
 
 
     public static int ejercicio15(GrafoTDA grafo, int verticeEntrada) {
@@ -204,6 +218,7 @@ public class UsoClass {
         while(!conjuntoTDA.conjuntoVacio()){
             int verticeDelGrafo = conjuntoTDA.elegir();
             if(grafo.existeArista(verticeEntrada,verticeDelGrafo)){ grados++;}
+            if(grafo.existeArista(verticeDelGrafo,verticeEntrada)){ grados--;}
             conjuntoTDA.sacar(verticeDelGrafo);
         }
         return grados;
